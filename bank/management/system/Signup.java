@@ -93,6 +93,7 @@ public class Signup extends JFrame implements ActionListener {
         female.setBounds(450,220,80,30);
         add(female);
 
+        //adds all buttons to a group so only one can be selected at a time
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(male);
         buttonGroup.add(female);
