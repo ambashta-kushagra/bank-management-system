@@ -43,6 +43,7 @@ public class Signup2 extends JFrame implements ActionListener {
         personinfo.setBounds(250,60,600,40);
         add(personinfo);
 
+        //religion
         JLabel religion = new JLabel("Religion : ");
         religion.setFont(new Font("Raleway",Font.BOLD,18));
         religion.setBounds(100,120,100,30);
@@ -209,7 +210,44 @@ public class Signup2 extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        String rel = (String) comboBoxr.getSelectedItem();
+        String cat = (String) comboBoxc.getSelectedItem();
+        String inc = (String) comboBoxi.getSelectedItem();
+        String educ = (String) comboBoxe.getSelectedItem();
+        String occu = (String) comboBoxo.getSelectedItem();
+
+        String pan = textpan.getText();
+        String aad = textadhaar.getText();
+
+        String sencit = " ";
+        if (syes.isSelected()) {
+            sencit = "Yes";
+        } else if (sno.isSelected()) {
+            sencit = "No";
+        }
+
+        String exacc = " ";
+        if (e1.isSelected()) {
+            exacc = "Yes";
+        } else if (e2.isSelected()) {
+            exacc = "No";
+        }
+
+        try{
+            if (textpan.getText().equals("") || textadhaar.getText().equals("")){
+                JOptionPane.showMessageDialog(null,"Fill all the fields!");
+            }else {
+                Connect c1 = new Connect();
+                String q = "insert into signuptwo values('"+formno+"','"+rel+"', '"+cat+"', '"+inc+"', '"+educ+"', '"+occu+"', '"+pan+"', '"+aad+"', '"+sencit+"', '"+exacc+"')";
+                c1.statement.executeUpdate(q);
+                new Signup3(formno);
+                setVisible(false);
+            }
+
+        }catch (Exception E){
+            E.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args) {
