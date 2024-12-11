@@ -13,7 +13,10 @@ public class Signup3 extends JFrame implements ActionListener {
 
     JCheckBox c1,c2,c3,c4,c5,c6;
 
-    Signup3(){
+    String formno;
+
+    Signup3(String formno){
+        this.formno = formno;
 
         //bank icon
         ImageIcon b1 = new ImageIcon(ClassLoader.getSystemResource("icon/bank.png"));
@@ -202,6 +205,6 @@ public class Signup3 extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Signup3();
+        new Signup3(" ");
     }
 }
