@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class Signup3 extends JFrame implements ActionListener {
 
@@ -178,7 +179,7 @@ public class Signup3 extends JFrame implements ActionListener {
         s.setBackground(Color.BLACK);
         s.setForeground(Color.WHITE);
         s.setBounds(250,600,100,30);
-        //s.addActionListener(this);
+        s.addActionListener(this);
         add(s);
 
         c = new JButton("Cancel");
@@ -186,7 +187,7 @@ public class Signup3 extends JFrame implements ActionListener {
         c.setBackground(Color.BLACK);
         c.setForeground(Color.WHITE);
         c.setBounds(420,600,100,30);
-        //s.addActionListener(this);
+        c.addActionListener(this);
         add(c);
 
 
@@ -201,6 +202,46 @@ public class Signup3 extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String atype = null;
+        if (sav.isSelected()){
+            atype = "Savings Account";
+        } else if (fix.isSelected()) {
+            atype = "Fixed Deposit";
+        } else if (curr.isSelected()) {
+            atype = "Current Account";
+        } else if (dep.isSelected()){
+            atype = "Recurring Deposit Account";
+        }
+
+        Random ran = new Random();
+        long first7 = (ran.nextLong() % 90000000L) + 1409963000000000L;
+        String cardno = "" + Math.abs(first7);
+
+        long first3 = (ran.nextLong() % 9000L) + 1000L;
+        String pin = "" + Math.abs(first3);
+
+        String fac = "";
+        if (c1.isSelected()){
+            fac += "ATM CARD";
+        }
+        if (c2.isSelected()){
+            fac += "Internet Banking";
+        }
+        if (c3.isSelected()){
+            fac += "Mobile Banking";
+        }
+        if (c4.isSelected()){
+            fac += "Email Alerts";
+        }
+        if (c5.isSelected()){
+            fac += "Cheque Book";
+        }
+        if (c6.isSelected()){
+            fac += "E-statement";
+        }
+        
+
+
 
     }
 
