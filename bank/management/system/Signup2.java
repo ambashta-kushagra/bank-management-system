@@ -17,7 +17,7 @@ public class Signup2 extends JFrame implements ActionListener {
 
     String formno;
 
-    Signup2(String first){
+    Signup2(String formno){
         super("APPLICATION FORM");
 
 
