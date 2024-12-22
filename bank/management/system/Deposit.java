@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 public class Deposit extends JFrame implements ActionListener {
 
@@ -39,14 +40,14 @@ public class Deposit extends JFrame implements ActionListener {
         deposit.setBounds(580,280,120,30);
         deposit.setBackground(new Color(65,125,128));
         deposit.setForeground(Color.WHITE);
-        //deposit.addActionListener(this);
+        deposit.addActionListener(this);
         l3.add(deposit);
 
         back = new JButton("BACK");
         back.setBounds(580,315,120,30);
         back.setBackground(new Color(65,125,128));
         back.setForeground(Color.WHITE);
-        //deposit.addActionListener(this);
+        deposit.addActionListener(this);
         l3.add(back);
 
 
@@ -66,7 +67,27 @@ public class Deposit extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String amount = textField.getText();
+        try {
+            String amount = textField.getText();
+            Date date = new Date();
+            if (e.getSource()==deposit){
+                if(textField.getText().equals("")){
+                    JOptionPane.showMessageDialog(null,"Please enter Amount you want to Deposit");
+                }
+                else {
+                    Connect c = new Connect();
+                    c.statement.executeUpdate("insert into bank values('"+pin+"','"+date+"','Deposit','"+amount+"')");
+                    JOptionPane.showMessageDialog(null,"Rs."+amount+" deposited successfully.");
+                    setVisible(false);
+                }
+            } else if (e.getSource()==back) {
+                setVisible(false);
+            }
+        } catch (Exception E) {
+            E.printStackTrace();;
+        }
+                
+                
     }
 
     public static void main(String[] args) {
