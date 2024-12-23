@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 public class Login extends JFrame implements ActionListener {
 
@@ -93,7 +94,7 @@ public class Login extends JFrame implements ActionListener {
         Image bg2 = bg1.getImage().getScaledInstance(850,480,Image.SCALE_DEFAULT);
         ImageIcon bg3 = new ImageIcon(bg2);
         JLabel bgimage = new JLabel(bg3);
-        bgimage.setBounds(0,0, 840,480);
+        bgimage.setBounds(0,0, 850,480);
         add(bgimage);
 
 
@@ -101,6 +102,7 @@ public class Login extends JFrame implements ActionListener {
         setLayout(null);
         setSize(850,480);
         setLocation(250,100);
+        //setUndecorated(true);
         setVisible(true);
     }
 
@@ -109,7 +111,17 @@ public class Login extends JFrame implements ActionListener {
         try{
             if (e.getSource() == signin)
             {
-
+                Connect c = new Connect();
+                String cardno = cardtextfield.getText();
+                String pin = pinpassfield.getText();
+                String q = "select * from Login where card_number = '"+cardno+"' and pin = '"+pin+"'";
+                ResultSet resultSet = c.statement.executeQuery(q);
+                if (resultSet.next()){
+                    setVisible(false);
+                    new main_Class(pin);
+                }else {
+                    JOptionPane.showMessageDialog(null,"Incorrect Credentials");
+                }
             }
             else if (e.getSource() == clear)
             {
@@ -127,5 +139,7 @@ public class Login extends JFrame implements ActionListener {
 
     }
 
-    public static void main(String[] args) {new Login();}
+    public static void main(String[] args) {
+        new Login();
+    }
 }
